@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXTMILE EMPIRE | System Status</title>
+    <style>
+        :root {
+            --bg: #0f0f13;
+            --card: #1a1a20;
+            --text: #e0e0e0;
+            --accent: #00d4ff;
+            --success: #00ff88;
+            --warning: #ffcc00;
+            --danger: #ff4444;
+        }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
+        
+        /* Header & Progress */
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin: 0; background: linear-gradient(90deg, var(--accent), #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: #666; font-size: 0.9em; margin-top: 5px; }
+
+        .progress-system { background: var(--card); padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: sticky; top: 20px; z-index: 100; border: 1px solid #333; }
+        .bar-container { height: 30px; background: #000; border-radius: 15px; overflow: hidden; position: relative; border: 1px solid #333; }
+        .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--success)); width: 0%; transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 0 20px var(--success); }
+        .stats { display: flex; justify-content: space-between; margin-top: 10px; font-weight: bold; font-size: 1.2em; }
+        .percent { color: var(--success); text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+
+        /* Modules List */
+        .module-card { background: var(--card); margin-top: 20px; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; }
+        .module-header { padding: 15px 20px; background: #25252d; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .module-header:hover { background: #2f2f38; }
+        .module-title { font-weight: 700; color: #fff; }
+        .module-progress { font-size: 0.8em; color: #888; background: #1a1a20; padding: 2px 8px; border-radius: 4px; }
+        
+        .tasks-list { display: none; padding: 10px 20px 20px; border-top: 1px solid #333; }
+        .module-card.active .tasks-list { display: block; animation: slideDown 0.3s ease; }
+        .module-card.active .module-header { border-left: 4px solid var(--accent); }
+
+        /* Checkboxes */
+        .task-item { display: flex; align-items: flex-start; margin: 12px 0; font-size: 0.95em; color: #ccc; transition: all 0.2s; }
+        .task-item:hover { color: #fff; }
+        .checkbox-wrapper { margin-right: 12px; padding-top: 2px; }
+        input[type="checkbox"] { transform: scale(1.3); cursor: pointer; accent-color: var(--success); }
+        
+        .section-title { color: var(--accent); font-weight: 600; margin-top: 15px; margin-bottom: 5px; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Admin Generator Box */
+        .admin-box { margin-top: 50px; padding: 20px; background: #000; border: 1px dashed #444; border-radius: 8px; color: #666; font-family: monospace; font-size: 0.8em; word-break: break-all; }
+        .admin-box h3 { margin-top: 0; color: #888; }
+        .copy-btn { background: var(--accent); color: #000; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-bottom: 10px; }
+        .copy-btn:hover { background: #fff; }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>NextMile Empire ERP</h1>
+            <div class="subtitle">System Implementation Roadmap</div>
+        </header>
+
+        <div class="progress-system">
+            <div class="bar-container">
+                <div class="bar-fill" id="mainProgressBar"></div>
+            </div>
+            <div class="stats">
+                <span style="font-size: 0.7em; color: #666; align-self: center;">STATUS: INSTALLING...</span>
+                <span class="percent" id="totalPercent">0%</span>
+            </div>
+        </div>
+
+        <div id="modulesContainer"></div>
+
+        <div class="admin-box">
+            <h3>⚙️ ПАНЕЛЬ АДМІНІСТРАТОРА (ОНОВЛЕННЯ СТАТУСУ)</h3>
+            <p>1. Відміть галочки вище.<br>2. Натисніть кнопку "Копіювати код".<br>3. Зайди на GitHub, відкрий файл index.html (Edit).<br>4. Заміни весь рядок у блоці <b>SAVED STATE</b> в самому низу файлу.</p>
+            <button class="copy-btn" onclick="copyState()">Копіювати код налаштувань</button>
+            <div id="outputState" style="opacity: 0.5;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. DATA STRUCTURE (Всі твої модулі тут)
+        // ==========================================
+        const rawData = [
+            {
+                title: "МОДУЛЬ №1 — НАЛАШТУВАННЯ (GLOBAL CORE)",
+                sections: [
+                    { name: "1.0. Профіль компанії (Юр. особи, Бренд)", items: ["Юридичні сутності (ФОП/ТОВ)", "Реквізити та Банк", "Логотип та контакти"] },
+                    { name: "2.0. Локалізація (Час, Мова)", items: ["Часовий пояс та формати", "Графік роботи СТО", "Мова інтерфейсу"] },
+                    { name: "3.0. Фінансова політика", items: ["Мультивалютність (UAH/USD/EUR)", "Податки (ПДВ, ЄП)", "Методи оплати (Каса, Термінал, Crypto)"] },
+                    { name: "4.0. Ціноутворення робіт", items: ["Вартість нормо-години", "Класи авто (A, B, C, VIP)", "Спец. ставки (Електрика)"] },
+                    { name: "5.0. Матриця запчастин", items: ["Націнка від вхідної ціни", "Фіксація мінімальної маржі"] },
+                    { name: "7.0. Права доступу (RBAC)", items: ["Ролі (Admin, Майстер, Механік)", "Критичні дозволи"] },
+                    { name: "8.0-9.0. Документи та Тригери", items: ["Шаблони (Акт, Рахунок)", "SMS/Месенджер шлюзи"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №2 — КОМАНДА (HR & TEAM)",
+                sections: [
+                    { name: "1.0. Профілі", items: ["Картка співробітника", "Навички та розряди"] },
+                    { name: "2.0. Ієрархія", items: ["Система Майстер-Учень", "Бригадири"] },
+                    { name: "3.0. Графіки", items: ["Планувальник змін", "Time & Attendance"] },
+                    { name: "4.0. Зарплата (Формули)", items: ["Конструктор схем ЗП", "Гарантійний фонд"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №3 — КЛІЄНТИ (CRM)",
+                sections: [
+                    { name: "1.0. База клієнтів", items: ["Профіль та контакти", "Сегментація (VIP, Blacklist)", "Ліміти боргу"] },
+                    { name: "2.0. Гараж", items: ["Картка авто (VIN decoder)", "Історія володіння"] },
+                    { name: "4.0. B2B Флот", items: ["Корпоративні парки", "Водії та довіреності"] },
+                    { name: "5.0. GDPR", items: ["Згода на обробку", "Анонімізація"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №4 — МАРКЕТИНГ",
+                sections: [
+                    { name: "1.0. Бонусна система", items: ["Нарахування кешбеку", "Рівні (Gold, Platinum)"] },
+                    { name: "2.0. Рефералка", items: ["Промокоди 'Приведи друга'", "Винагороди"] },
+                    { name: "3.0. Партнери", items: ["Кабінет партнера (Евакуатор)", "Комісійні"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №5 — ВИРОБНИЦТВО (CORE)",
+                sections: [
+                    { name: "1.0. Замовлення-наряд", items: ["Створення замовлення", "Прийом (Скарги, Паливо)"] },
+                    { name: "2.0. Роботи (Мульти-майстри)", items: ["Додавання послуг", "Кілька виконавців на одну роботу", "Коефіцієнт участі"] },
+                    { name: "3.0. Запчастини", items: ["Резерв зі складу", "Замовлення", "Запчастини клієнта"] },
+                    { name: "4.0. Фінанси замовлення", items: ["Аванси", "Знижки (сума/%)"] },
+                    { name: "6.0. Рекомендації", items: ["Відкладений ремонт", "Дефектовка"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №6 — КОНТРОЛЬ ЯКОСТІ",
+                sections: [
+                    { name: "1.0. Вхідний контроль", items: ["Інтерактивна карта кузова (2D)", "Фото пошкоджень"] },
+                    { name: "2.0. Чек-листи", items: ["Червона/Жовта/Зелена зони", "Відео-аргументація"] },
+                    { name: "5.0. Цифровий звіт", items: ["Web-посилання для клієнта", "Фотозвіт"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №7 — АВТОПАРК (FLEET)",
+                sections: [
+                    { name: "1.0. Реєстр", items: ["Підмінні авто", "Евакуатор", "Страховки"] },
+                    { name: "2.0. Календар", items: ["Бронювання", "Акти прийому-передачі"] },
+                    { name: "5.0. Економіка", items: ["ROI авто", "Собівартість 1 км"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №8 — СКЛАД",
+                sections: [
+                    { name: "1.0. Картка товару", items: ["Артикули та бренди", "Адресне зберігання (Полиці)"] },
+                    { name: "2.0. Рух", items: ["Прихід", "Списання", "Інвентаризація"] },
+                    { name: "3.0. Кроси", items: ["База аналогів", "TecDoc API"] },
+                    { name: "4.0. Закупівлі", items: ["Авто-замовлення (Min/Max)", "Повернення"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №9 — ФІНАНСИ",
+                sections: [
+                    { name: "1.0. Рахунки", items: ["Каси (Готівка, Рахунок, Crypto)", "Інкасація"] },
+                    { name: "3.0. Зарплата", items: ["Розрахункова відомість", "Друк корінців"] },
+                    { name: "5.0. P&L Звіт", items: ["Доходи vs Витрати", "Чистий прибуток"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №10 — ІНВЕСТИЦІЇ",
+                sections: [
+                    { name: "1.0. Проекти", items: ["Авто під перепродаж", "Бюджетування"] },
+                    { name: "2.0. Відновлення", items: ["Внутрішні наряди по собівартості", "Капіталізація"] },
+                    { name: "4.0. Продаж", items: ["Розрахунок маржі", "Частка інвестора"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №11 — АВТОМАТИЗАЦІЯ",
+                sections: [
+                    { name: "1.0. Тригери", items: ["Зміна статусів", "SMS про готовність"] },
+                    { name: "2.0. Часові події", items: ["Нагадування про ТО", "День народження"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №12 — ПОРТАЛ ТА API",
+                sections: [
+                    { name: "1.0. Клієнтський портал", items: ["Вхід по телефону", "Історія ремонтів"] },
+                    { name: "3.0. Фінтех", items: ["Інтеграція з банками", "LiqPay/ApplePay"] },
+                    { name: "4.0. Постачальники", items: ["Онлайн-ціни (API)"] }
+                ]
+            },
+            {
+                title: "МОДУЛЬ №13 — БЕЗПЕКА",
+                sections: [
+                    { name: "1.0. Аудит", items: ["Логи дій", "Soft Delete"] },
+                    { name: "2.0. Доступ", items: ["Обмеження по IP", "Блокування сесій"] }
+                ]
+            }
+        ];
+
+        // ==========================================
+        // 2. SAVED STATE (Сюди вставляти код)
+        // ==========================================
+        // Приклад: const savedState = ["0-0-0", "1-2-1"];
+        const savedState = []; 
+
+        // ==========================================
+        // 3. ENGINE
+        // ==========================================
+        const container = document.getElementById('modulesContainer');
+        const progressBar = document.getElementById('mainProgressBar');
+        const totalPercentDisplay = document.getElementById('totalPercent');
+        let totalItems = 0;
+        let checkedItems = 0;
+
+        function init() {
+            let globalIndex = 0; // Unique ID for each checkbox
+            
+            rawData.forEach((mod, mIndex) => {
+                const modDiv = document.createElement('div');
+                modDiv.className = 'module-card';
+                
+                // Header
+                const header = document.createElement('div');
+                header.className = 'module-header';
+                header.innerHTML = `<span class="module-title">${mod.title}</span><span class="module-progress" id="prog-${mIndex}">0%</span>`;
+                header.onclick = () => { modDiv.classList.toggle('active'); };
+                
+                // List
+                const list = document.createElement('div');
+                list.className = 'tasks-list';
+                
+                let moduleItemsCount = 0;
+                let moduleCheckedCount = 0;
+
+                mod.sections.forEach(sec => {
+                    const secTitle = document.createElement('div');
+                    secTitle.className = 'section-title';
+                    secTitle.innerText = sec.name;
+                    list.appendChild(secTitle);
+
+                    sec.items.forEach(item => {
+                        const uniqueId = `${mIndex}-${globalIndex}`;
+                        const isChecked = savedState.includes(uniqueId);
+                        
+                        const taskDiv = document.createElement('div');
+                        taskDiv.className = 'task-item';
+                        taskDiv.innerHTML = `
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="${uniqueId}" ${isChecked ? 'checked' : ''} onchange="updateCalc()">
+                            </div>
+                            <label for="${uniqueId}">${item}</label>
+                        `;
+                        list.appendChild(taskDiv);
+                        globalIndex++;
+                        totalItems++;
+                    });
+                });
+
+                modDiv.appendChild(header);
+                modDiv.appendChild(list);
+                container.appendChild(modDiv);
+            });
+            updateCalc();
+        }
+
+        function updateCalc() {
+            checkedItems = 0;
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            const currentCheckedIds = [];
+
+            // Calculate per module
+            const modules = document.querySelectorAll('.module-card');
+            modules.forEach((mod, mIndex) => {
+                const checks = mod.querySelectorAll('input[type="checkbox"]');
+                let mTotal = checks.length;
+                let mChecked = 0;
+                
+                checks.forEach(c => {
+                    if(c.checked) {
+                        mChecked++;
+                        currentCheckedIds.push(c.id);
+                    }
+                });
+                
+                const mPercent = mTotal === 0 ? 0 : Math.round((mChecked/mTotal)*100);
+                document.getElementById(`prog-${mIndex}`).innerText = `${mPercent}%`;
+                if(mPercent === 100) document.getElementById(`prog-${mIndex}`).style.color = '#00ff88';
+                
+                checkedItems += mChecked;
+            });
+
+            // Global Progress
+            const totalPercent = totalItems === 0 ? 0 : Math.round((checkedItems/totalItems)*100);
+            progressBar.style.width = `${totalPercent}%`;
+            totalPercentDisplay.innerText = `${totalPercent}%`;
+
+            // Generate Save String
+            const saveString = `const savedState = ${JSON.stringify(currentCheckedIds)};`;
+            document.getElementById('outputState').innerText = saveString;
+        }
+
+        function copyState() {
+            const text = document.getElementById('outputState').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Код скопійовано! Тепер:\n1. Йди на GitHub\n2. Відкрий файл index.html\n3. Заміни рядок 'const savedState = ...' внизу файлу\n4. Збережи (Commit)");
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
