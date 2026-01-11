@@ -2,173 +2,641 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXTMILE EMPIRE | Roadmap</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEXTMILE EMPIRE | Command Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="roadmap.css?v=1">
+    <link rel="stylesheet" href="roadmap.css?v=2">
 </head>
 <body>
 
-    <div class="top-bar">
-        <div class="brand">
-            <i class="fa-solid fa-crown"></i> NEXTMILE
-        </div>
-        
-        <div class="progress-container">
-            <div class="progress-labels">
-                <span>START</span>
-                <span id="progressText">0%</span>
-                <span>EMPIRE</span>
+    <div class="top-panel">
+        <div class="header-row">
+            <div class="brand-logo">
+                <i class="fa-solid fa-crown"></i> NEXTMILE <span>EMPIRE</span>
             </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="rocketBar">
-                    <div class="rocket-icon"><i class="fa-solid fa-shuttle-space"></i></div>
+            <div class="action-buttons">
+                <button id="btnGetCode" class="btn-neon"><i class="fa-solid fa-floppy-disk"></i> ЗБЕРЕГТИ ПРОГРЕС</button>
+            </div>
+        </div>
+
+        <div class="mega-progress">
+            <div class="progress-info">
+                <span class="p-label">SYSTEM READINESS</span>
+                <span class="p-percent" id="progressText">0%</span>
+            </div>
+            <div class="progress-track-lg">
+                <div class="progress-fill-lg" id="rocketBar">
+                    <div class="rocket-ship"><i class="fa-solid fa-shuttle-space"></i></div>
+                    <div class="fire-trail"></div>
                 </div>
             </div>
         </div>
-
-        <div class="controls">
-            <button id="btnGetCode" class="btn-control highlight">
-                <i class="fa-solid fa-code"></i> <span>Отримати код</span>
-            </button>
-        </div>
     </div>
 
-    <div class="roadmap-grid">
+    <div class="main-container">
 
-        <div class="module-card" id="mod1">
-            <div class="mod-header"><div class="mod-num">01</div><div class="mod-title">CORE & SETTINGS<br><small>Глобальні налаштування</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c1_1"> Профіль компанії (Юр. особи)</label>
-                <label><input type="checkbox" id="c1_2"> Мультивалютність (UAH/USD/EUR)</label>
-                <label><input type="checkbox" id="c1_3"> Податкова логіка (ПДВ/ФОП)</label>
-                <label><input type="checkbox" id="c1_4"> Права доступу (RBAC)</label>
+        <div class="module-block" id="mod1">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">01</div>
+                    <div class="m-info">
+                        <h2>НАЛАШТУВАННЯ (CORE)</h2>
+                        <p>Мозок системи. Валюти, права, податки.</p>
+                    </div>
+                </div>
+                <div class="m-right">
+                    <div class="m-status"><i class="fa-regular fa-circle"></i></div>
+                </div>
+            </div>
+            
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ПРОФІЛЬ КОМПАНІЇ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_1_1"> Список юросіб (ФОП/ТОВ)</label>
+                        <label><input type="checkbox" id="m1_1_2"> Реквізити (ІПН, Адреса, IBAN)</label>
+                        <label><input type="checkbox" id="m1_1_3"> Бренд (Логотип, Фавікон)</label>
+                        <label><input type="checkbox" id="m1_1_4"> Контакти в підвалі документів</label>
+                    </div>
+                </details>
+
+                <details class="section-group">
+                    <summary>2.0. ЛОКАЛІЗАЦІЯ ТА ЧАС <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_2_1"> Часовий пояс (Kyiv)</label>
+                        <label><input type="checkbox" id="m1_2_2"> Робочий графік СТО</label>
+                        <label><input type="checkbox" id="m1_2_3"> Мова інтерфейсу (UA/EN)</label>
+                    </div>
+                </details>
+
+                <details class="section-group">
+                    <summary>3.0. ФІНАНСОВА ПОЛІТИКА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_3_1"> Мультивалютність (UAH/USD/EUR)</label>
+                        <label><input type="checkbox" id="m1_3_2"> Типи курсів (НБУ/Готівковий)</label>
+                        <label><input type="checkbox" id="m1_3_3"> Податкові ставки (ПДВ/ЄП)</label>
+                        <label><input type="checkbox" id="m1_3_4"> Методи оплати (Cash/Terminal/Crypto)</label>
+                    </div>
+                </details>
+
+                <details class="section-group">
+                    <summary>4.0. ЦІНОУТВОРЕННЯ РОБІТ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_4_1"> Вартість нормо-години (Base)</label>
+                        <label><input type="checkbox" id="m1_4_2"> Класи авто (A/B/C/VIP)</label>
+                        <label><input type="checkbox" id="m1_4_3"> Спец. ставки (Електрика/Зварювання)</label>
+                        <label><input type="checkbox" id="m1_4_4"> Округлення часу</label>
+                    </div>
+                </details>
+
+                <details class="section-group">
+                    <summary>5.0. НАЦІНКА ЗАПЧАСТИН <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_5_1"> Матриця націнки (від вхідної ціни)</label>
+                        <label><input type="checkbox" id="m1_5_2"> Мінімальна маржа (в грн)</label>
+                    </div>
+                </details>
+
+                 <details class="section-group">
+                    <summary>7.0. ПРАВА ДОСТУПУ (RBAC) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_7_1"> Ролі (Власник, Майстер, Механік)</label>
+                        <label><input type="checkbox" id="m1_7_2"> Дозвіл: Ручна зміна ціни</label>
+                        <label><input type="checkbox" id="m1_7_3"> Дозвіл: Видалення замовлень</label>
+                        <label><input type="checkbox" id="m1_7_4"> Дозвіл: Експорт бази клієнтів</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>8.0. ШАБЛОНИ ДОКУМЕНТІВ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m1_8_1"> Замовлення-наряд</label>
+                        <label><input type="checkbox" id="m1_8_2"> Акт виконаних робіт</label>
+                        <label><input type="checkbox" id="m1_8_3"> Рахунок-фактура</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod2">
-            <div class="mod-header"><div class="mod-num">02</div><div class="mod-title">TEAM (HR)<br><small>Команда та Зарплати</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c2_1"> Профілі співробітників</label>
-                <label><input type="checkbox" id="c2_2"> Ієрархія (Наставник-Учень)</label>
-                <label><input type="checkbox" id="c2_3"> Графіки змін</label>
-                <label><input type="checkbox" id="c2_4"> Конструктор ЗП (KPI)</label>
+        <div class="module-block" id="mod2">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">02</div>
+                    <div class="m-info">
+                        <h2>КОМАНДА (HR)</h2>
+                        <p>Люди, графіки, ієрархія, зарплати.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ПРОФІЛІ СПІВРОБІТНИКІВ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m2_1_1"> Особисті дані та Фото</label>
+                        <label><input type="checkbox" id="m2_1_2"> Спеціалізація (Навички)</label>
+                        <label><input type="checkbox" id="m2_1_3"> Допуски до робіт</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ІЄРАРХІЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m2_2_1"> Ролі: Майстер / Учень / Бригадир</label>
+                        <label><input type="checkbox" id="m2_2_2"> Зв'язка "Наставник - Учень"</label>
+                        <label><input type="checkbox" id="m2_2_3"> Авто-розподіл % Наставнику</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ГРАФІК РОБОТИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m2_3_1"> Календар змін</label>
+                        <label><input type="checkbox" id="m2_3_2"> Check-in / Check-out (Облік часу)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. КОНСТРУКТОР ЗП <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m2_4_1"> Ставка (Fixed)</label>
+                        <label><input type="checkbox" id="m2_4_2"> % від Робіт</label>
+                        <label><input type="checkbox" id="m2_4_3"> % від Запчастин</label>
+                        <label><input type="checkbox" id="m2_4_4"> Гарантійний фонд (Утримання)</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod3">
-            <div class="mod-header"><div class="mod-num">03</div><div class="mod-title">CLIENTS (CRM)<br><small>База клієнтів</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c3_1"> Картка клієнта 360°</label>
-                <label><input type="checkbox" id="c3_2"> Гараж автомобілів</label>
-                <label><input type="checkbox" id="c3_3"> Історія взаємодії</label>
-                <label><input type="checkbox" id="c3_4"> B2B Кабінети (Флоти)</label>
+        <div class="module-block" id="mod3">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">03</div>
+                    <div class="m-info">
+                        <h2>КЛІЄНТИ (CRM)</h2>
+                        <p>База 360°, Гараж, Історія.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. БАЗА КЛІЄНТІВ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m3_1_1"> Картка клієнта (ПІБ, Канали)</label>
+                        <label><input type="checkbox" id="m3_1_2"> Сегментація (VIP, Чорний список)</label>
+                        <label><input type="checkbox" id="m3_1_3"> Баланс та Ліміт боргу</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ГАРАЖ КЛІЄНТА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m3_2_1"> Картка авто (VIN, Номер, Рік)</label>
+                        <label><input type="checkbox" id="m3_2_2"> Історія володіння (перепродаж)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. КОРПОРАТИВНІ (B2B) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m3_4_1"> Структура компанії-платника</label>
+                        <label><input type="checkbox" id="m3_4_2"> Водії та Довірені особи</label>
+                        <label><input type="checkbox" id="m3_4_3"> Договірні умови</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod4">
-            <div class="mod-header"><div class="mod-num">04</div><div class="mod-title">MARKETING<br><small>Лояльність та Ріст</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c4_1"> Бонусна система (Cashback)</label>
-                <label><input type="checkbox" id="c4_2"> Реферальна програма</label>
-                <label><input type="checkbox" id="c4_3"> Партнерська мережа</label>
-                <label><input type="checkbox" id="c4_4"> Промокоди та Акції</label>
+        <div class="module-block" id="mod4">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">04</div>
+                    <div class="m-info">
+                        <h2>МАРКЕТИНГ</h2>
+                        <p>Лояльність, Кешбек, Ріст.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. БОНУСНА СИСТЕМА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m4_1_1"> % Кешбеку від робіт/запчастин</label>
+                        <label><input type="checkbox" id="m4_1_2"> Грейди (Start, Gold, Platinum)</label>
+                        <label><input type="checkbox" id="m4_1_3"> Оплата бонусами</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. РЕФЕРАЛЬНА ПРОГРАМА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m4_2_1"> Промокод "Приведи друга"</label>
+                        <label><input type="checkbox" id="m4_2_2"> Винагорода за рекомендацію</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>3.0. ПАРТНЕРСЬКА МЕРЕЖА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m4_3_1"> Кабінет партнера</label>
+                        <label><input type="checkbox" id="m4_3_2"> Трекінг лідів</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod5">
-            <div class="mod-header"><div class="mod-num">05</div><div class="mod-title">PRODUCTION<br><small>Виробництво (СТО)</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c5_1"> Замовлення-наряд</label>
-                <label><input type="checkbox" id="c5_2"> Мульти-майстри (Бригади)</label>
-                <label><input type="checkbox" id="c5_3"> Планування (Timeline)</label>
-                <label><input type="checkbox" id="c5_4"> Рекомендації (Відкладений попит)</label>
+        <div class="module-block" id="mod5">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">05</div>
+                    <div class="m-info">
+                        <h2>ВИРОБНИЦТВО</h2>
+                        <p>Замовлення, Мульти-майстри, Процес.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ЗАМОВЛЕННЯ-НАРЯД <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m5_1_1"> Шапка (Клієнт, Авто, Пробіг)</label>
+                        <label><input type="checkbox" id="m5_1_2"> Тип (Комерційний/Гарантія/Внутрішній)</label>
+                        <label><input type="checkbox" id="m5_1_3"> Прийом (Рівень пального, Речі)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. РОБОТИ (LABOR) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m5_2_1"> Довідник робіт</label>
+                        <label><input type="checkbox" id="m5_2_2"> Мульти-майстри (Бригади)</label>
+                        <label><input type="checkbox" id="m5_2_3"> Коефіцієнт участі (50/50)</label>
+                        <label><input type="checkbox" id="m5_2_4"> Статуси виконання</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ЗАПЧАСТИНИ В ЗАМОВЛЕННІ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m5_3_1"> Зі складу / Під замовлення</label>
+                        <label><input type="checkbox" id="m5_3_2"> Запчастини клієнта (позначка)</label>
+                        <label><input type="checkbox" id="m5_3_3"> Ручне редагування ціни</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>4.0. ФІНАНСИ ЗАМОВЛЕННЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m5_4_1"> Аванси (Передплати)</label>
+                        <label><input type="checkbox" id="m5_4_2"> Знижки (Сума/%)</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>6.0. РЕКОМЕНДАЦІЇ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m5_6_1"> Дефектовка (Критично/Бажано)</label>
+                        <label><input type="checkbox" id="m5_6_2"> Відкладений попит</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod6">
-            <div class="mod-header"><div class="mod-num">06</div><div class="mod-title">QUALITY CONTROL<br><small>Медіа докази</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c6_1"> Карта кузова (Огляд)</label>
-                <label><input type="checkbox" id="c6_2"> Діагностичні чек-листи</label>
-                <label><input type="checkbox" id="c6_3"> Фото/Відео звіт (Evidence)</label>
-                <label><input type="checkbox" id="c6_4"> Вихідний контроль</label>
+        <div class="module-block" id="mod6">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">06</div>
+                    <div class="m-info">
+                        <h2>КОНТРОЛЬ ЯКОСТІ</h2>
+                        <p>Докази, Фото, Відео.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ВХІДНИЙ КОНТРОЛЬ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m6_1_1"> Інтерактивна карта кузова</label>
+                        <label><input type="checkbox" id="m6_1_2"> Фото пошкоджень</label>
+                        <label><input type="checkbox" id="m6_1_3"> Опис салону (Чек-лист)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ДІАГНОСТИКА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m6_2_1"> Шаблони чек-листів</label>
+                        <label><input type="checkbox" id="m6_2_2"> Логіка "Світлофора" (Зел/Жов/Чер)</label>
+                        <label><input type="checkbox" id="m6_2_3"> Відео-аргументація</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ФОТО-ЗВІТ (EVIDENCE) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m6_3_1"> Порівняння "Було / Стало"</label>
+                        <label><input type="checkbox" id="m6_3_2"> Фото нових запчастин</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod7">
-            <div class="mod-header"><div class="mod-num">07</div><div class="mod-title">FLEET<br><small>Автопарк компанії</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c7_1"> Реєстр власних авто</label>
-                <label><input type="checkbox" id="c7_2"> Календар прокату/підміни</label>
-                <label><input type="checkbox" id="c7_3"> Обслуговування парку</label>
-                <label><input type="checkbox" id="c7_4"> Економіка (ROI авто)</label>
+        <div class="module-block" id="mod7">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">07</div>
+                    <div class="m-info">
+                        <h2>АВТОПАРК (FLEET)</h2>
+                        <p>Власні авто, прокат, евакуатор.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. РЕЄСТР АВТОПАРКУ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m7_1_1"> Картка активу (Підмінне/Прокат)</label>
+                        <label><input type="checkbox" id="m7_1_2"> Страхування (Поліси, дати)</label>
+                        <label><input type="checkbox" id="m7_1_3"> Нагадування про ТО</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. КАЛЕНДАР ЗАВАНТАЖЕННЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m7_2_1"> Сітка бронювання (Gantt)</label>
+                        <label><input type="checkbox" id="m7_2_2"> Акт прийому-передачі (Пробіг, Паливо)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ОБСЛУГОВУВАННЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m7_3_1"> Внутрішні ремонти (по Собівартості)</label>
+                        <label><input type="checkbox" id="m7_3_2"> Планове ТО</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>5.0. ЕКОНОМІКА (ROI) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m7_5_1"> Звіт прибутковості авто</label>
+                        <label><input type="checkbox" id="m7_5_2"> Вартість 1 км пробігу</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod8">
-            <div class="mod-header"><div class="mod-num">08</div><div class="mod-title">SUPPLY CHAIN<br><small>Склад та Закупівлі</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c8_1"> Адресне зберігання</label>
-                <label><input type="checkbox" id="c8_2"> Аналоги та Кроси</label>
-                <label><input type="checkbox" id="c8_3"> Авто-закупівлі</label>
-                <label><input type="checkbox" id="c8_4"> Інвентаризація</label>
+        <div class="module-block" id="mod8">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">08</div>
+                    <div class="m-info">
+                        <h2>СКЛАД (SUPPLY CHAIN)</h2>
+                        <p>Запчастини, Адресне зберігання, Кроси.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. КАРТКА ТОВАРУ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m8_1_1"> Артикул, Бренд, Штрих-код</label>
+                        <label><input type="checkbox" id="m8_1_2"> Адресне зберігання (Полиця/Комірка)</label>
+                        <label><input type="checkbox" id="m8_1_3"> Ліміти (Min/Max)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. РУХ ТОВАРІВ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m8_2_1"> Прихід (Імпорт накладної)</label>
+                        <label><input type="checkbox" id="m8_2_2"> Списання (У виробництво / Власні потреби)</label>
+                        <label><input type="checkbox" id="m8_2_3"> Переміщення між складами</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. АНАЛОГИ (КРОСИ) <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m8_3_1"> База кросів (TecDoc)</label>
+                        <label><input type="checkbox" id="m8_3_2"> Ручні зв'язки товарів</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. ЗАКУПІВЛІ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m8_4_1"> Авто-замовлення (Low Stock)</label>
+                        <label><input type="checkbox" id="m8_4_2"> Замовлення під клієнта</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>5.0. ІНВЕНТАРИЗАЦІЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m8_5_1"> Повна ревізія</label>
+                        <label><input type="checkbox" id="m8_5_2"> Акти надлишків/нестачі</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod9">
-            <div class="mod-header"><div class="mod-num">09</div><div class="mod-title">FINANCE (P&L)<br><small>Грошові потоки</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c9_1"> Гаманці та Рахунки</label>
-                <label><input type="checkbox" id="c9_2"> P&L Звіт (Прибуток)</label>
-                <label><input type="checkbox" id="c9_3"> Взаєморозрахунки</label>
-                <label><input type="checkbox" id="c9_4"> Податковий облік</label>
+        <div class="module-block" id="mod9">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">09</div>
+                    <div class="m-info">
+                        <h2>ФІНАНСИ (P&L)</h2>
+                        <p>Каса, Зарплати, Прибуток.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ГАМАНЦІ ТА РАХУНКИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m9_1_1"> Реєстр гаманців (Каса/Рахунок/Термінал)</label>
+                        <label><input type="checkbox" id="m9_1_2"> Інкасація та Обмін валют</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ТРАНЗАКЦІЇ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m9_2_1"> Доходи (Від замовлень)</label>
+                        <label><input type="checkbox" id="m9_2_2"> Витрати (Змінні/Постійні/CapEx)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ЗАРПЛАТА <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m9_3_1"> Розрахункова відомість</label>
+                        <label><input type="checkbox" id="m9_3_2"> Виплата та друк "корінця"</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. ВЗАЄМОРОЗРАХУНКИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m9_4_1"> Борги Постачальникам</label>
+                        <label><input type="checkbox" id="m9_4_2"> Дебіторка Клієнтів</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>5.0. ЗВІТ P&L <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m9_5_1"> Gross Margin (Брудний прибуток)</label>
+                        <label><input type="checkbox" id="m9_5_2"> Net Profit (Чистий прибуток)</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod10">
-            <div class="mod-header"><div class="mod-num">10</div><div class="mod-title">INVESTMENTS<br><small>Автобізнес (Перепродаж)</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c10_1"> Проект "Авто"</label>
-                <label><input type="checkbox" id="c10_2"> Капіталізація ремонту</label>
-                <label><input type="checkbox" id="c10_3"> Економіка проекту</label>
-                <label><input type="checkbox" id="c10_4"> ROI Аналітика</label>
+        <div class="module-block" id="mod10">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">10</div>
+                    <div class="m-info">
+                        <h2>ІНВЕСТИЦІЇ (AUTO)</h2>
+                        <p>Перепродаж авто, Проекти.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ПРОЕКТ "АВТО" <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m10_1_1"> Картка проекту (Бюджет)</label>
+                        <label><input type="checkbox" id="m10_1_2"> Інвестор та частка</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ВІДНОВЛЕННЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m10_2_1"> Внутрішні наряди (Капіталізація)</label>
+                        <label><input type="checkbox" id="m10_2_2"> Аутсорсинг</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. ПРОДАЖ ТА ПРИБУТОК <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m10_4_1"> Угода продажу</label>
+                        <label><input type="checkbox" id="m10_4_2"> Розподіл (Інвестор/Компанія)</label>
+                        <label><input type="checkbox" id="m10_4_3"> ROI Аналітика</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod11">
-            <div class="mod-header"><div class="mod-num">11</div><div class="mod-title">AUTOMATION<br><small>Тригери та Роботи</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c11_1"> Подієві тригери (SMS)</label>
-                <label><input type="checkbox" id="c11_2"> Часові нагадування</label>
-                <label><input type="checkbox" id="c11_3"> Внутрішні алерти</label>
-                <label><input type="checkbox" id="c11_4"> Конструктор сценаріїв</label>
+        <div class="module-block" id="mod11">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">11</div>
+                    <div class="m-info">
+                        <h2>АВТОМАТИЗАЦІЯ</h2>
+                        <p>Тригери, SMS, Нагадування.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ПОДІЄВІ ТРИГЕРИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m11_1_1"> SMS при зміні статусу авто</label>
+                        <label><input type="checkbox" id="m11_1_2"> Сповіщення про борги</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. ЧАСОВІ ТРИГЕРИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m11_2_1"> День народження клієнта</label>
+                        <label><input type="checkbox" id="m11_2_2"> Нагадування про ТО/Страховку</label>
+                        <label><input type="checkbox" id="m11_2_3"> Повернення "втрачених" (Churn)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>4.0. КАНАЛИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m11_4_1"> SMS / Viber / Telegram шлюзи</label>
+                        <label><input type="checkbox" id="m11_4_2"> Шаблони повідомлень</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod12">
-            <div class="mod-header"><div class="mod-num">12</div><div class="mod-title">WEB & API<br><small>Портал та Інтеграції</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c12_1"> Клієнтський портал</label>
-                <label><input type="checkbox" id="c12_2"> IP-Телефонія</label>
-                <label><input type="checkbox" id="c12_3"> Банкінг / Еквайринг</label>
-                <label><input type="checkbox" id="c12_4"> Постачальники (API)</label>
+        <div class="module-block" id="mod12">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">12</div>
+                    <div class="m-info">
+                        <h2>ПОРТАЛ ТА ІНТЕГРАЦІЇ</h2>
+                        <p>Web, Банкінг, Телефонія.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. КЛІЄНТСЬКИЙ ПОРТАЛ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m12_1_1"> Вхід за номером телефону</label>
+                        <label><input type="checkbox" id="m12_1_2"> "Мій Гараж" та Історія</label>
+                        <label><input type="checkbox" id="m12_1_3"> Онлайн-запис</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. IP-ТЕЛЕФОНІЯ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m12_2_1"> Спливаюча картка при дзвінку</label>
+                        <label><input type="checkbox" id="m12_2_2"> Запис розмов</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>3.0. БАНКІНГ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m12_3_1"> Інтеграція виписок (API)</label>
+                        <label><input type="checkbox" id="m12_3_2"> Онлайн-оплата рахунків</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-        <div class="module-card" id="mod13">
-            <div class="mod-header"><div class="mod-num">13</div><div class="mod-title">SECURITY<br><small>Безпека та Аудит</small></div><div class="mod-status"><i class="fa-regular fa-circle"></i></div></div>
-            <div class="checklist">
-                <label><input type="checkbox" id="c13_1"> Журнал подій (Logs)</label>
-                <label><input type="checkbox" id="c13_2"> Контроль доступу (IP/Time)</label>
-                <label><input type="checkbox" id="c13_3"> Anti-Fraud система</label>
-                <label><input type="checkbox" id="c13_4"> Бекапи</label>
+        <div class="module-block" id="mod13">
+            <div class="module-header">
+                <div class="m-left">
+                    <div class="m-num">13</div>
+                    <div class="m-info">
+                        <h2>БЕЗПЕКА (SECURITY)</h2>
+                        <p>Аудит, Логи, Захист.</p>
+                    </div>
+                </div>
+                <div class="m-right"><div class="m-status"><i class="fa-regular fa-circle"></i></div></div>
+            </div>
+            <div class="module-content">
+                <details class="section-group">
+                    <summary>1.0. ЖУРНАЛ ПОДІЙ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m13_1_1"> Логування змін (Хто/Коли/Що)</label>
+                        <label><input type="checkbox" id="m13_1_2"> Soft Delete (Кошик видаленого)</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>2.0. КОНТРОЛЬ ДОСТУПУ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m13_2_1"> Тайм-аут сесій</label>
+                        <label><input type="checkbox" id="m13_2_2"> Обмеження по IP (Тільки офіс)</label>
+                        <label><input type="checkbox" id="m13_2_3"> 2FA Аутентифікація</label>
+                    </div>
+                </details>
+                <details class="section-group">
+                    <summary>3.0. ANTI-FRAUD <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m13_3_1"> Блокування редагування (24h)</label>
+                        <label><input type="checkbox" id="m13_3_2"> Алерти: Масовий перегляд / Велика знижка</label>
+                    </div>
+                </details>
+                 <details class="section-group">
+                    <summary>4.0. БЕКАПИ <i class="fa-solid fa-chevron-down"></i></summary>
+                    <div class="section-body">
+                        <label><input type="checkbox" id="m13_4_1"> Щоденний повний бекап</label>
+                        <label><input type="checkbox" id="m13_4_2"> Інкрементальний (кожні 15 хв)</label>
+                    </div>
+                </details>
             </div>
         </div>
 
-    </div>
+    </div> <textarea id="shareUrl" style="opacity:0; position:absolute; z-index:-1;"></textarea>
 
-    <script src="roadmap.js?v=1"></script>
+    <script src="roadmap.js?v=2"></script>
 </body>
 </html>
+
+Коли скопіюєш це і напишеш **"Давай далі"** або **"Готово"**, я скину **Частину 2** (Модулі 7-13, які є дуже важливими: Автопарк, Склад, Гроші і Безпека).
