@@ -3,263 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NextMile ERP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&family=Rye&display=swap" rel="stylesheet">
+    <title>NEXTMILE EMPIRE | Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="roadmap.css">
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo">
-            <img src="img/logo.svg" alt="NextMile Logo" class="logo-img">
+    <div class="top-bar">
+        <div class="brand">
+            <i class="fa-solid fa-crown"></i> NEXTMILE EMPIRE
         </div>
-
-        <nav>
-            <div class="nav-label">ОПЕРАЦІЙНА ДІЯЛЬНІСТЬ</div>
-            
-            <a href="#" class="menu-item active" data-target="clients">
-                <i class="fa-solid fa-users"></i> КЛІЄНТИ (CRM)
-            </a>
-
-            <a href="#" class="menu-item" data-target="workshop">
-                <i class="fa-solid fa-gears"></i> ВИРОБНИЦТВО
-            </a>
-
-            <a href="#" class="menu-item" data-target="warehouse">
-                <i class="fa-solid fa-boxes-stacked"></i> СКЛАД
-            </a>
-
-            <a href="#" class="menu-item" data-target="kasa">
-                <i class="fa-solid fa-chart-line"></i> ФІНАНСИ (P&L)
-            </a>
-
-            <div class="nav-divider"></div>
-
-            <div class="nav-label">РОЗВИТОК</div>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-user-group"></i> КОМАНДА (HR)
-            </a>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-bullhorn"></i> МАРКЕТИНГ
-            </a>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-car"></i> АВТОПАРК
-            </a>
-
-             <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-sack-dollar"></i> ІНВЕСТИЦІЇ
-            </a>
-
-            <div class="nav-divider"></div>
-
-            <div class="nav-label">КОНТРОЛЬ</div>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-clipboard-check"></i> КОНТРОЛЬ ЯКОСТІ
-            </a>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-shield-halved"></i> БЕЗПЕКА
-            </a>
-
-            <div class="nav-divider"></div>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-robot"></i> АВТОМАТИЗАЦІЯ
-            </a>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-globe"></i> ПОРТАЛ
-            </a>
-
-            <a href="#" class="menu-item locked" title="Скоро буде">
-                <i class="fa-solid fa-sliders"></i> НАЛАШТУВАННЯ
-            </a>
-        </nav>
+        
+        <div class="progress-container">
+            <div class="progress-labels">
+                <span>START</span>
+                <span id="progressText">0%</span>
+                <span>EMPIRE</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="rocketBar">
+                    <div class="rocket-icon"><i class="fa-solid fa-shuttle-space"></i></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="main-content">
-        <div class="header">
-            <div>
-                <h1>NextMile Empire</h1>
-                <p class="text-muted">Система керування автосервісом</p>
+    <div class="roadmap-grid">
+
+        <div class="module-card" id="mod1">
+            <div class="mod-header">
+                <div class="mod-num">01</div>
+                <div class="mod-title">CORE & SETTINGS<br><small>Глобальні налаштування</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
             </div>
-            <button class="btn btn-icon" onclick="loadData()" title="Оновити дані">
-                <i class="fa-solid fa-rotate-right"></i>
-            </button>
-        </div>
-
-        <div id="clientsList" class="grid-container"></div>
-
-        <div id="kanbanBoard" class="kanban-container" style="display: none;"></div>
-
-        <div id="warehouseView" style="display: none;">
-            <div class="card fade-in">
-                <div class="card-body">
-                    <div class="view-header">
-                        <h2>📦 Склад запчастин</h2>
-                        <button class="btn btn-save" onclick="document.getElementById('productModal').showModal()">+ Додати Товар</button>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>Артикул</th>
-                                    <th>Назва</th>
-                                    <th>Категорія</th>
-                                    <th>Залишок</th>
-                                    <th>Вхід</th>
-                                    <th>Вихід</th>
-                                    <th class="text-right">Дії</th>
-                                </tr>
-                            </thead>
-                            <tbody id="productsTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="1"> Профіль компанії (Юр. особи)</label>
+                <label><input type="checkbox" data-mod="1"> Мультивалютність (UAH/USD/EUR)</label>
+                <label><input type="checkbox" data-mod="1"> Податкова логіка (ПДВ/ФОП)</label>
+                <label><input type="checkbox" data-mod="1"> Права доступу (RBAC)</label>
             </div>
         </div>
 
-        <div id="kasaView" style="display: none;">
-            <div class="view-header">
-                <h2>💰 Фінанси та Зарплати (P&L)</h2>
+        <div class="module-card" id="mod2">
+            <div class="mod-header">
+                <div class="mod-num">02</div>
+                <div class="mod-title">TEAM (HR)<br><small>Команда та Зарплати</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
             </div>
-
-            <div class="dashboard-grid">
-                <div class="dash-card income">
-                    <div class="dash-title">Загальний Оборот</div>
-                    <div class="dash-value" id="totalRevenue">0 ₴</div>
-                    <div class="dash-sub">Роботи + Запчастини</div>
-                </div>
-                <div class="dash-card expense">
-                    <div class="dash-title">Витрати (Запчастини)</div>
-                    <div class="dash-value" id="totalPartsCost">0 ₴</div>
-                </div>
-                <div class="dash-card profit">
-                    <div class="dash-title">"Брудний" Прибуток</div>
-                    <div class="dash-value" id="grossProfit">0 ₴</div>
-                    <div class="dash-sub">Без вирахування ЗП</div>
-                </div>
-                <div class="dash-card salary">
-                    <div class="dash-title">Фонд Зарплати</div>
-                    <div class="dash-value" id="totalSalaryFund">0 ₴</div>
-                    <div class="dash-sub">Орієнтовно</div>
-                </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="2"> Профілі співробітників</label>
+                <label><input type="checkbox" data-mod="2"> Ієрархія (Наставник-Учень)</label>
+                <label><input type="checkbox" data-mod="2"> Графіки змін</label>
+                <label><input type="checkbox" data-mod="2"> Конструктор ЗП (KPI)</label>
             </div>
+        </div>
 
-            <div class="card fade-in salary-section">
-                <div class="card-body">
-                    <h3 class="section-title">Зарплатна відомість</h3>
-                    <div class="table-wrapper">
-                        <table class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>Майстер</th>
-                                    <th>Послуг</th>
-                                    <th>Години</th>
-                                    <th>Каса робіт</th>
-                                    <th>Зарплата (На руки)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="salaryTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="module-card" id="mod3">
+            <div class="mod-header">
+                <div class="mod-num">03</div>
+                <div class="mod-title">CLIENTS (CRM)<br><small>База клієнтів</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="3"> Картка клієнта 360°</label>
+                <label><input type="checkbox" data-mod="3"> Гараж автомобілів</label>
+                <label><input type="checkbox" data-mod="3"> Історія взаємодії</label>
+                <label><input type="checkbox" data-mod="3"> B2B Кабінети (Флоти)</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod4">
+            <div class="mod-header">
+                <div class="mod-num">04</div>
+                <div class="mod-title">MARKETING<br><small>Лояльність та Ріст</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="4"> Бонусна система (Cashback)</label>
+                <label><input type="checkbox" data-mod="4"> Реферальна програма</label>
+                <label><input type="checkbox" data-mod="4"> Партнерська мережа</label>
+                <label><input type="checkbox" data-mod="4"> Промокоди та Акції</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod5">
+            <div class="mod-header">
+                <div class="mod-num">05</div>
+                <div class="mod-title">PRODUCTION<br><small>Виробництво (СТО)</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="5"> Замовлення-наряд</label>
+                <label><input type="checkbox" data-mod="5"> Мульти-майстри (Бригади)</label>
+                <label><input type="checkbox" data-mod="5"> Планування (Timeline)</label>
+                <label><input type="checkbox" data-mod="5"> Рекомендації (Відкладений попит)</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod6">
+            <div class="mod-header">
+                <div class="mod-num">06</div>
+                <div class="mod-title">QUALITY CONTROL<br><small>Медіа докази</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="6"> Карта кузова (Огляд)</label>
+                <label><input type="checkbox" data-mod="6"> Діагностичні чек-листи</label>
+                <label><input type="checkbox" data-mod="6"> Фото/Відео звіт (Evidence)</label>
+                <label><input type="checkbox" data-mod="6"> Вихідний контроль</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod7">
+            <div class="mod-header">
+                <div class="mod-num">07</div>
+                <div class="mod-title">FLEET<br><small>Автопарк компанії</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="7"> Реєстр власних авто</label>
+                <label><input type="checkbox" data-mod="7"> Календар прокату/підміни</label>
+                <label><input type="checkbox" data-mod="7"> Обслуговування парку</label>
+                <label><input type="checkbox" data-mod="7"> Економіка (ROI авто)</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod8">
+            <div class="mod-header">
+                <div class="mod-num">08</div>
+                <div class="mod-title">SUPPLY CHAIN<br><small>Склад та Закупівлі</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="8"> Адресне зберігання</label>
+                <label><input type="checkbox" data-mod="8"> Аналоги та Кроси</label>
+                <label><input type="checkbox" data-mod="8"> Авто-закупівлі</label>
+                <label><input type="checkbox" data-mod="8"> Інвентаризація</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod9">
+            <div class="mod-header">
+                <div class="mod-num">09</div>
+                <div class="mod-title">FINANCE (P&L)<br><small>Грошові потоки</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="9"> Гаманці та Рахунки</label>
+                <label><input type="checkbox" data-mod="9"> P&L Звіт (Прибуток)</label>
+                <label><input type="checkbox" data-mod="9"> Взаєморозрахунки</label>
+                <label><input type="checkbox" data-mod="9"> Податковий облік</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod10">
+            <div class="mod-header">
+                <div class="mod-num">10</div>
+                <div class="mod-title">INVESTMENTS<br><small>Автобізнес (Перепродаж)</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="10"> Проект "Авто"</label>
+                <label><input type="checkbox" data-mod="10"> Капіталізація ремонту</label>
+                <label><input type="checkbox" data-mod="10"> Економіка проекту</label>
+                <label><input type="checkbox" data-mod="10"> ROI Аналітика</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod11">
+            <div class="mod-header">
+                <div class="mod-num">11</div>
+                <div class="mod-title">AUTOMATION<br><small>Тригери та Роботи</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="11"> Подієві тригери (SMS)</label>
+                <label><input type="checkbox" data-mod="11"> Часові нагадування</label>
+                <label><input type="checkbox" data-mod="11"> Внутрішні алерти</label>
+                <label><input type="checkbox" data-mod="11"> Конструктор сценаріїв</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod12">
+            <div class="mod-header">
+                <div class="mod-num">12</div>
+                <div class="mod-title">WEB & API<br><small>Портал та Інтеграції</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="12"> Клієнтський портал</label>
+                <label><input type="checkbox" data-mod="12"> IP-Телефонія</label>
+                <label><input type="checkbox" data-mod="12"> Банкінг / Еквайринг</label>
+                <label><input type="checkbox" data-mod="12"> Постачальники (API)</label>
+            </div>
+        </div>
+
+        <div class="module-card" id="mod13">
+            <div class="mod-header">
+                <div class="mod-num">13</div>
+                <div class="mod-title">SECURITY<br><small>Безпека та Аудит</small></div>
+                <div class="mod-status"><i class="fa-regular fa-circle"></i></div>
+            </div>
+            <div class="checklist">
+                <label><input type="checkbox" data-mod="13"> Журнал подій (Logs)</label>
+                <label><input type="checkbox" data-mod="13"> Контроль доступу (IP/Time)</label>
+                <label><input type="checkbox" data-mod="13"> Anti-Fraud система</label>
+                <label><input type="checkbox" data-mod="13"> Бекапи</label>
             </div>
         </div>
 
     </div>
 
-    <button class="fab" onclick="document.getElementById('clientModal').showModal()">
-        <i class="fa-solid fa-plus"></i>
-    </button>
-
-    <dialog id="clientModal">
-        <div class="modal-header">
-            <span>Новий Клієнт</span>
-            <button class="btn-close" onclick="document.getElementById('clientModal').close()"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <form id="addClientForm">
-            <div class="modal-body">
-                <div class="form-group"><label>ПІБ Клієнта</label><input type="text" id="newClientName" required></div>
-                <div class="form-group"><label>Телефон</label><input type="text" id="newClientPhone" required></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-cancel" onclick="document.getElementById('clientModal').close()">Скасувати</button>
-                <button type="submit" class="btn-save">Зберегти</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="orderModal">
-        <div class="modal-header">
-            <span>Заказ-наряд</span>
-            <button class="btn-close" onclick="document.getElementById('orderModal').close()"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <form id="addOrderForm">
-            <div class="modal-body">
-                <input type="hidden" id="modalClientId">
-                <label>Автомобіль</label><input type="text" id="carModel" class="form-control" placeholder="BMW X5..." required>
-                
-                <div class="service-header-row">
-                    <label class="no-margin">РОБОТИ</label>
-                    <button type="button" class="btn-small" onclick="addServiceRow()">+ Рядок</button>
-                </div>
-                
-                <div id="services-container"></div>
-                
-                <div class="form-group spacer-top">
-                    <label>ВАРТІСТЬ ЗАПЧАСТИН (ГРН)</label><input type="number" id="partsCost" class="form-control" oninput="calc()">
-                </div>
-                <div class="form-group">
-                    <label>Аванс (грн)</label><input type="number" id="advance" class="form-control" oninput="calc()">
-                </div>
-                <div id="liveTotal" class="total-display">РАЗОМ: 0 грн</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-cancel" onclick="document.getElementById('orderModal').close()">Закрити</button>
-                <button type="submit" class="btn-save">Зберегти</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="productModal">
-        <div class="modal-header">
-            <span>📦 Товар</span>
-            <button class="btn-close" onclick="document.getElementById('productModal').close()"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <form id="addProductForm">
-            <div class="modal-body">
-                <div class="flex-row gap-15">
-                    <div class="flex-1"><label>Артикул</label><input type="text" id="prodSku" placeholder="OC90" required></div>
-                    <div class="flex-1"><label>Категорія</label><input type="text" id="prodCategory" placeholder="Фільтри"></div>
-                </div>
-                
-                <label>Назва</label><input type="text" id="prodName" required>
-                <label>Кількість</label><input type="number" id="prodQty" value="1">
-                
-                <div class="flex-row gap-15 mt-10">
-                    <div class="flex-1">
-                        <label>Вхід</label>
-                        <div class="input-group">
-                            <input type="number" id="prodBuy">
-                            <select id="prodCurrency"><option value="UAH">₴</option><option value="USD">$</option><option value="EUR">€</option></select>
-                        </div>
-                    </div>
-                    <div class="flex-1"><label>Вихід (ГРН)</label><input type="number" id="prodSell" required></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-cancel" onclick="document.getElementById('productModal').close()">Скасувати</button>
-                <button type="submit" class="btn-save">Додати</button>
-            </div>
-        </form>
-    </dialog>
-
-    <script src="script.js"></script>
+    <script src="roadmap.js"></script>
 </body>
 </html>
