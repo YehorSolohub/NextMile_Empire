@@ -1,0 +1,359 @@
+:root {
+    --bg-body: #f4f7f6;
+    --sidebar-bg: #111;
+    --accent: #d32f2f;
+    --text: #333;
+    --card-bg: #fff;
+    --border: #e0e0e0;
+    
+    /* Статуси */
+    --status-queue: #6c757d;
+    --status-work: #f39c12;
+    --status-done: #27ae60;
+}
+
+body {
+    margin: 0; 
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg-body); 
+    color: var(--text);
+    display: flex; 
+    height: 100vh; 
+    overflow: hidden;
+}
+
+/* UTILS */
+.hidden { display: none !important; }
+.text-right { text-align: right; }
+.no-margin { margin: 0; }
+.spacer-top { margin-top: 20px; }
+.mt-10 { margin-top: 10px; }
+.gap-15 { gap: 15px; }
+.flex-row { display: flex; }
+.flex-1 { flex: 1; }
+
+/* --- SIDEBAR (Бокове меню) --- */
+.sidebar {
+    width: 260px; 
+    background: var(--sidebar-bg); 
+    color: #fff;
+    display: flex; 
+    flex-direction: column; 
+    padding: 20px; 
+    flex-shrink: 0;
+    overflow-y: auto; /* Дозволяє скролити меню, якщо воно довге */
+    height: 100vh;
+    box-sizing: border-box;
+    scrollbar-width: thin; /* Тонкий скрол для Firefox */
+    scrollbar-color: #333 #111;
+}
+
+/* Стилізація скролбару для Chrome/Safari */
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: #111; }
+.sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+.logo { text-align: center; margin-bottom: 30px; }
+.logo img { max-width: 140px; border-radius: 5px; }
+
+/* Заголовки груп в меню */
+.nav-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #555;
+    margin: 20px 0 8px 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.nav-label:first-of-type { margin-top: 0; }
+
+.nav-divider {
+    height: 1px;
+    background: #222;
+    margin: 10px 0;
+}
+
+/* Пункти меню */
+.menu-item {
+    padding: 10px 15px; 
+    margin-bottom: 4px; 
+    cursor: pointer;
+    border-radius: 8px; 
+    color: #999; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+    font-weight: 600; 
+    font-size: 13px;
+    transition: 0.2s;
+    text-decoration: none !important;
+}
+
+.menu-item:hover { background: #222; color: #fff; }
+
+.menu-item.active {
+    background: linear-gradient(90deg, #222, var(--accent));
+    color: #fff; 
+    border-left: 3px solid var(--accent);
+}
+
+.menu-item i { width: 20px; text-align: center; }
+
+/* Заблоковані пункти */
+.menu-item.locked {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.menu-item.locked:hover {
+    background: transparent;
+    color: #999;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content { 
+    flex: 1; 
+    padding: 30px; 
+    overflow-y: auto; 
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+h1 { margin: 0; font-weight: 800; font-size: 2rem; color: #2c3e50; }
+.text-muted { color: #888; font-size: 0.9rem; margin-top: 5px; }
+
+/* --- GRID & CARDS --- */
+#clientsList {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 25px; padding-bottom: 100px;
+}
+.card {
+    background: var(--card-bg); 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #f0f0f0;
+    display: flex; flex-direction: column; 
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+.card-body { padding: 25px; }
+
+/* Анімація появи */
+.fade-in { animation: fadeIn 0.4s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- CLIENT HEADER --- */
+.client-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;
+}
+.client-info { display: flex; gap: 15px; align-items: center; }
+.avatar-initials {
+    width: 42px; height: 42px; background: #2c3e50; color: #fff;
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px;
+}
+.client-actions { display: flex; gap: 8px; }
+
+/* --- BUTTONS --- */
+.btn-icon {
+    width: 32px; height: 32px; border: 1px solid #e0e0e0; border-radius: 8px;
+    background: #fff; color: #666; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; transition: 0.2s;
+}
+.btn-icon:hover { border-color: #333; color: #000; }
+.delete-btn:hover { border-color: #ffcccc; color: #e74c3c; background: #fff5f5; }
+
+.btn-save {
+    padding: 10px 24px; background: var(--accent); color: #fff;
+    border: none; border-radius: 8px; cursor: pointer; 
+    font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;
+    transition: 0.2s;
+}
+.btn-save:hover { background: #b71c1c; box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3); }
+
+.btn-cancel {
+    padding: 10px 24px; background: #fff; border: 1px solid #ddd;
+    color: #555; border-radius: 8px; cursor: pointer; 
+    font-weight: 700; font-size: 13px; text-transform: uppercase;
+    transition: 0.2s;
+}
+.btn-cancel:hover { background: #f9f9f9; color: #333; border-color: #bbb; }
+
+.btn-small {
+    padding: 6px 12px; background: #f1f3f5; border: none;
+    border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; color: #555;
+}
+.btn-small:hover { background: #e9ecef; color: #333; }
+
+/* --- ORDERS --- */
+.order-item {
+    background: #f8f9fa; border: 1px solid #edf2f7; border-radius: 10px;
+    padding: 16px; margin-bottom: 12px;
+}
+.order-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+}
+.car-title { font-weight: 800; color: #2c3e50; font-size: 14px; }
+.status-badge {
+    font-size: 9px; padding: 4px 8px; border-radius: 4px;
+    background: #e2e6ea; color: #495057; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.order-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 12px; border-top: 1px solid #eee; font-weight: 700; font-size: 13px;
+}
+.text-success { color: #27ae60; }
+.text-danger { color: #e74c3c; }
+
+/* --- KASA DASHBOARD --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+.dash-card {
+    background: #fff; padding: 25px; border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #f0f0f0;
+    position: relative; overflow: hidden;
+}
+.dash-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+.dash-card.income::before { background: #3498db; }
+.dash-card.expense::before { background: #e74c3c; }
+.dash-card.profit::before { background: #27ae60; }
+.dash-card.salary::before { background: #f39c12; }
+
+.dash-title { font-size: 11px; color: #999; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+.dash-value { font-size: 28px; font-weight: 800; margin: 10px 0; color: #2c3e50; }
+.dash-sub { font-size: 12px; color: #bbb; }
+
+.salary-section { margin-top: 30px; }
+.section-title { margin-top: 0; margin-bottom: 20px; font-size: 1.2rem; font-weight: 700; }
+
+/* --- TABLES (Warehouse & Salary) --- */
+.view-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.view-header h2 { margin: 0; font-size: 1.5rem; font-weight: 700; color: #2c3e50; }
+
+.table-wrapper {
+    background: #fff; border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    overflow: hidden; border: 1px solid #f0f0f0;
+}
+.styled-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.styled-table th { 
+    text-align: left; padding: 18px 25px; color: #8898aa; font-size: 11px; 
+    font-weight: 800; text-transform: uppercase; background-color: #f8f9fe; border-bottom: 1px solid #edf2f7; letter-spacing: 0.5px;
+}
+.styled-table td { padding: 18px 25px; border-bottom: 1px solid #edf2f7; vertical-align: middle; color: #333; font-weight: 600; }
+.styled-table tr:hover { background-color: #fcfcfc; }
+.styled-table tr:last-child td { border-bottom: none; }
+
+/* --- MODAL --- */
+dialog {
+    border: none; border-radius: 16px; padding: 0;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.2); width: 600px;
+    background: #fff;
+}
+dialog::backdrop { background: rgba(22, 26, 30, 0.6); backdrop-filter: blur(4px); }
+
+.modal-header {
+    background: #1e293b; color: #fff; padding: 20px 30px;
+    font-size: 18px; font-weight: 700;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.btn-close { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 20px; transition: 0.2s; }
+.btn-close:hover { color: #fff; }
+
+.modal-body { padding: 30px; max-height: 70vh; overflow-y: auto; }
+.modal-footer {
+    display: flex; justify-content: flex-end; gap: 15px;
+    padding: 20px 30px; border-top: 1px solid #f0f0f0; background: #f8f9fa;
+}
+
+/* INPUTS */
+label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-control, input, select {
+    width: 100%; padding: 12px 15px;
+    border: 1px solid #e2e8f0; border-radius: 8px;
+    font-size: 14px; font-weight: 500; color: #334155;
+    box-sizing: border-box; display: block; margin-bottom: 15px;
+    transition: 0.2s;
+}
+.form-control:focus, input:focus, select:focus { 
+    border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1); 
+}
+
+/* Input Groups */
+.input-group { display: flex; width: 100%; }
+.input-group input { border-top-right-radius: 0; border-bottom-right-radius: 0; border-right: none; }
+.input-group select { width: 80px; border-top-left-radius: 0; border-bottom-left-radius: 0; background-color: #f1f5f9; cursor: pointer; margin-bottom: 15px; }
+
+/* --- SERVICE ROWS --- */
+.service-header-row { display: flex; justify-content: space-between; align-items: center; margin: 25px 0 10px; }
+.service-row {
+    background: #f8fafc; padding: 20px; 
+    border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px;
+}
+.service-inputs-row { display: flex; gap: 15px; align-items: flex-end; width: 100%; margin-bottom: 10px; }
+.col-name { flex: 4; }
+.col-qty { flex: 1; }
+.col-price { flex: 1.5; }
+.col-del { flex: 0.3; display: flex; justify-content: center; padding-bottom: 14px; }
+
+.btn-delete-row { color: #cbd5e1; cursor: pointer; font-size: 16px; transition: 0.2s; }
+.btn-delete-row:hover { color: #ef4444; transform: scale(1.2); }
+
+.total-display {
+    margin-top: 25px; padding: 20px; background: #f8fafc; border: 2px dashed #e2e8f0;
+    border-radius: 10px; text-align: right; font-size: 20px; font-weight: 800; color: #0f172a;
+}
+
+/* --- KANBAN --- */
+#kanbanBoard { display: flex; gap: 20px; height: calc(100vh - 150px); overflow-x: auto; padding-bottom: 20px; }
+.kanban-col {
+    flex: 1; min-width: 320px; background: #f1f5f9; 
+    border-radius: 12px; display: flex; flex-direction: column; border: 1px solid #e2e8f0;
+}
+.k-header { padding: 18px; border-radius: 11px 11px 0 0; color: #fff; font-weight: 800; text-transform: uppercase; display: flex; justify-content: space-between; font-size: 12px; letter-spacing: 1px; }
+.k-header.queue { background: var(--status-queue); }
+.k-header.work { background: var(--status-work); }
+.k-header.done { background: var(--status-done); }
+.k-body { padding: 15px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.kanban-card {
+    background: #fff; padding: 15px; border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02); cursor: grab;
+    border-left: 4px solid transparent; border: 1px solid #e2e8f0; border-left-width: 4px;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.kanban-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.kanban-card.status-queue { border-left-color: var(--status-queue); }
+.kanban-card.status-work { border-left-color: var(--status-work); }
+.kanban-card.status-done { border-left-color: var(--status-done); }
+
+/* --- FAB (Floating Button) --- */
+.fab {
+    position: fixed; bottom: 35px; right: 35px;
+    width: 64px; height: 64px; background: #1e293b; color: #fff;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; border: none; cursor: pointer;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25); transition: transform 0.2s, background 0.2s;
+    z-index: 100;
+}
+.fab:hover { transform: scale(1.1) rotate(90deg); background: var(--accent); }
+
+/* --- TOAST --- */
+#toast-container { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%); z-index: 2000; }
+.toast {
+    background: #1e293b; color: #fff; padding: 12px 24px; border-radius: 30px; margin-top: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-size: 14px; font-weight: 600;
+    animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
