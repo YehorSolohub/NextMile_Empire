@@ -1,236 +1,278 @@
+/* --- roadmap.css (PART 1) --- */
+
 :root {
-    --bg-dark: #0a0a0a;
-    --card-bg: #141414;
-    --accent: #d32f2f; /* NextMile Red */
-    --accent-glow: rgba(211, 47, 47, 0.4);
+    --bg-core: #0f1012;       /* Глибокий чорний */
+    --bg-card: #18191c;       /* Темно-сірий для карток */
+    --accent: #e50914;        /* NextMile Red (Яскравий) */
+    --accent-dark: #b20710;   /* Темніший червоний */
     --text-main: #ffffff;
-    --text-muted: #666;
-    --border: #333;
-    --success: #00ff88;
+    --text-muted: #808080;
+    --border: #2a2b2e;
+    --success: #00e676;       /* Зелений для "Готово" */
+    --glow: 0 0 15px rgba(229, 9, 20, 0.4); /* Неонове сяйво */
 }
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-core);
     color: var(--text-main);
     overflow-x: hidden;
+    padding-top: 140px; /* Відступ під фіксовану шапку */
 }
 
-/* --- TOP BAR (Ракета) --- */
-.top-bar {
-    position: sticky; top: 0;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px 40px;
+/* --- TOP PANEL (FIXED) --- */
+.top-panel {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: rgba(15, 16, 18, 0.95);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1000;
+    padding: 15px 5%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
-.brand {
-    font-weight: 800;
-    font-size: 24px;
-    letter-spacing: 2px;
-    color: var(--text-main);
+.header-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 15px;
+}
+
+.brand-logo {
+    font-weight: 900; font-size: 20px; letter-spacing: 1px; color: #fff;
     display: flex; align-items: center; gap: 10px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
-.brand i { color: var(--accent); }
+.brand-logo i { color: var(--accent); font-size: 24px; }
+.brand-logo span { color: var(--accent); }
 
-/* Шкала прогресу */
-.progress-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.progress-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 1px;
-}
-
-#progressText {
+/* --- BUTTONS --- */
+.btn-neon {
+    background: transparent;
+    border: 1px solid var(--accent);
     color: var(--accent);
-    font-size: 14px;
-}
-
-.progress-track {
-    height: 8px;
-    background: #222;
+    padding: 8px 16px;
     border-radius: 4px;
-    overflow: visible; /* Щоб ракета могла вилазити */
-    position: relative;
+    font-weight: 700; font-size: 12px;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+    transition: 0.3s;
+    display: flex; align-items: center; gap: 8px;
+}
+.btn-neon:hover {
+    background: var(--accent); color: #fff;
+    box-shadow: var(--glow);
 }
 
-.progress-fill {
+/* --- MEGA PROGRESS BAR --- */
+.mega-progress { width: 100%; max-width: 1200px; margin: 0 auto; }
+
+.progress-info {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 8px;
+}
+.p-label { font-size: 10px; font-weight: 700; color: var(--text-muted); letter-spacing: 2px; }
+.p-percent { font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+.progress-track-lg {
+    height: 12px;
+    background: #252629;
+    border-radius: 6px;
+    position: relative;
+    overflow: visible; /* Щоб ракета вилазила */
+}
+
+.progress-fill-lg {
     height: 100%;
-    background: linear-gradient(90deg, #b71c1c, var(--accent));
-    width: 0%; /* JS буде це міняти */
-    border-radius: 4px;
+    width: 0%; /* JS змінює це */
+    background: linear-gradient(90deg, #8a050b, var(--accent));
+    border-radius: 6px;
     position: relative;
-    transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 0 15px var(--accent-glow);
+    transition: width 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
 }
 
-/* Ракета на кінчику лінії */
-.rocket-icon {
+/* РАКЕТА */
+.rocket-ship {
     position: absolute;
-    right: -12px;
-    top: -14px; /* Трохи вище лінії */
-    font-size: 20px;
+    right: -14px; top: -16px;
+    font-size: 28px;
     color: #fff;
-    filter: drop-shadow(0 0 5px var(--accent));
+    filter: drop-shadow(0 0 8px var(--accent));
     transform: rotate(45deg);
     transition: transform 0.3s;
+    z-index: 2;
 }
 
-/* Коли прогрес рухається, ракета трохи "газує" */
-.progress-fill.moving .rocket-icon {
-    transform: rotate(45deg) scale(1.2);
+/* Вогонь з дюз (анімація) */
+.fire-trail {
+    position: absolute;
+    right: 5px; top: 2px; height: 8px; width: 40px;
+    background: linear-gradient(90deg, transparent, #ffcc00, #ff6600);
+    opacity: 0; transform: translateX(-10px);
+    border-radius: 4px; filter: blur(2px);
+    transition: 0.3s; z-index: 1;
 }
 
-/* --- GRID SYSTEM --- */
-.roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 40px;
-    max-width: 1600px;
+.progress-fill-lg.moving .rocket-ship { transform: rotate(45deg) scale(1.2); }
+.progress-fill-lg.moving .fire-trail { opacity: 1; transform: translateX(-20px); }
+
+/* --- roadmap.css (PART 2) --- */
+
+/* --- MAIN CONTAINER --- */
+.main-container {
+    max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
+    padding-bottom: 100px; /* Місце для скролу внизу */
 }
 
 /* --- MODULE CARD --- */
-.module-card {
-    background: var(--card-bg);
+.module-block {
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 25px;
+    margin-bottom: 20px;
+    overflow: hidden;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
 }
 
-.module-card:hover {
-    transform: translateY(-5px);
-    border-color: #555;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+.module-block:hover {
+    border-color: #444;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-/* СТАН: ВИКОНАНО (Магія) */
-.module-card.completed {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(211, 47, 47, 0.15), inset 0 0 20px rgba(211, 47, 47, 0.05);
-}
-
-.module-card.completed .mod-title { color: #fff; }
-.module-card.completed .mod-num { color: var(--accent); opacity: 1; }
-.module-card.completed .mod-status i { 
-    font-weight: 900; 
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
-}
-
-/* HEADER КАРТКИ */
-.mod-header {
+/* --- MODULE HEADER --- */
+.module-header {
+    padding: 20px 25px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #222;
-    padding-bottom: 15px;
-}
-
-.mod-num {
-    font-size: 32px;
-    font-weight: 800;
-    color: #333;
-    opacity: 0.5;
-}
-
-.mod-title {
-    flex: 1;
-    margin-left: 15px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #ccc;
-    text-transform: uppercase;
-}
-.mod-title small {
-    display: block;
-    font-size: 10px;
-    color: var(--text-muted);
-    text-transform: none;
-    font-weight: 400;
-    margin-top: 4px;
-}
-
-.mod-status {
-    font-size: 18px;
-    color: #333;
-}
-
-/* CHECKLIST */
-.checklist {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.checklist label {
-    display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 12px;
-    color: #888;
-    cursor: pointer;
-    transition: 0.2s;
-    user-select: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
 }
 
-.checklist label:hover { color: #fff; }
+.m-left { display: flex; gap: 20px; align-items: center; }
 
-/* Кастомні чекбокси */
-.checklist input[type="checkbox"] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
+.m-num {
+    font-size: 28px; font-weight: 900; color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.m-info h2 {
+    margin: 0; font-size: 16px; font-weight: 700; color: #eee;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+.m-info p {
+    margin: 4px 0 0 0; font-size: 11px; color: var(--text-muted);
+}
+
+.m-status { font-size: 22px; color: #333; transition: 0.3s; }
+
+/* СТАН: ВИКОНАНО (СВІТИТЬСЯ ЧЕРВОНИМ) */
+.module-block.completed {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.15);
+}
+.module-block.completed .m-num { color: var(--accent); opacity: 1; }
+.module-block.completed .m-status { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.module-block.completed .module-header { background: rgba(229, 9, 20, 0.05); }
+
+
+/* --- ACCORDION (DETAILS & SUMMARY) --- */
+.section-group {
+    border-top: 1px solid var(--border);
+}
+
+.section-group summary {
+    padding: 15px 25px;
+    cursor: pointer;
+    font-size: 12px; font-weight: 700; color: #bbb;
+    text-transform: uppercase; letter-spacing: 1px;
+    list-style: none; /* Ховаємо стандартний трикутник */
+    display: flex; justify-content: space-between; align-items: center;
+    transition: 0.2s;
+}
+
+.section-group summary::-webkit-details-marker { display: none; }
+
+.section-group summary:hover { background: rgba(255,255,255,0.02); color: #fff; }
+
+.section-group[open] summary {
+    background: rgba(255,255,255,0.03);
+    color: var(--accent);
+    border-bottom: 1px dashed #333;
+}
+
+.section-group summary i { transition: transform 0.3s; }
+.section-group[open] summary i { transform: rotate(180deg); }
+
+.section-body {
+    padding: 20px 25px;
+    background: #131416;
+    display: flex; flex-direction: column; gap: 15px;
+}
+
+/* --- CUSTOM CHECKBOXES --- */
+.section-body label {
+    display: flex; align-items: center; gap: 15px;
+    cursor: pointer;
+    font-size: 13px; color: #999; font-weight: 500;
+    transition: 0.2s; user-select: none;
+}
+
+.section-body label:hover { color: #fff; }
+
+/* Ховаємо рідний чекбокс */
+.section-body input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 20px; height: 20px;
+    background: #0a0a0a;
     border: 1px solid #444;
-    border-radius: 3px;
-    background: #000;
-    cursor: pointer;
-    position: relative;
-    transition: 0.2s;
+    border-radius: 4px;
+    cursor: pointer; position: relative;
+    transition: 0.2s; flex-shrink: 0;
 }
 
-.checklist input[type="checkbox"]:checked {
+/* Стан: Checked */
+.section-body input[type="checkbox"]:checked {
     background: var(--accent);
     border-color: var(--accent);
-    box-shadow: 0 0 8px var(--accent-glow);
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
 }
 
-/* Галочка всередині */
-.checklist input[type="checkbox"]:checked::after {
+/* Галочка */
+.section-body input[type="checkbox"]:checked::after {
     content: '✔';
-    font-size: 10px;
-    color: #fff;
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
+    color: #fff; font-size: 12px; font-weight: 900;
 }
 
 /* Закреслення тексту */
-.checklist input[type="checkbox"]:checked + span {
-    color: #555;
-    text-decoration: line-through;
+.section-body input[type="checkbox"]:checked + span {
+    text-decoration: line-through; color: #555;
+}
+
+/* --- MOBILE ADAPTATION --- */
+@media (max-width: 600px) {
+    body { padding-top: 160px; } /* Більше місця для шапки на мобільному */
+    
+    .top-panel { padding: 15px; }
+    .brand-logo { font-size: 16px; }
+    .btn-neon { padding: 6px 12px; font-size: 10px; }
+    .btn-neon i { display: none; } /* Ховаємо іконку кнопки на телефоні */
+    
+    .main-container { padding: 10px; }
+    
+    .module-header { padding: 15px; }
+    .m-num { font-size: 20px; }
+    .m-info h2 { font-size: 14px; }
+    
+    .section-body label { font-size: 12px; gap: 10px; }
+    
+    /* Ракета трохи менша */
+    .rocket-ship { font-size: 20px; top: -12px; right: -10px; }
+    .p-percent { font-size: 18px; }
 }
